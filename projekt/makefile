@@ -1,2 +1,22 @@
+INCLUDE_DIRS= include
+INC_PARAMS=$(foreach d, $(INCLUDE_DIRS), -I$d)
+APP_NAME=algoApp
+FLAGS=-Wall -Werror -o $(APP_NAME) $(INC_PARAMS)
+MEM_FLAGS=-Wall -Werror -fsanitize=address -fno-omit-frame-pointer -o $(APP_NAME) $(INC_PARAMS)
+
+APP_SRC=main.cpp
+SRC:=$(shell find src -name '*.cpp')
+
+all: main
+
 main:
-	clang++ main.cpp adjList.cpp -Wall -Werror -o test && ./test
+	clang++ $(APP_SRC) $(SRC) $(FLAGS) && ./$(APP_NAME)
+
+memcheck:
+	clang++ $(APP_SRC) $(SRC) $(MEM_FLAGS) && ./$(APP_NAME)
+
+valgrind:
+	clang++ $(APP_SRC) $(SRC) $(FLAGS) && valgrind --leak-check=full ./$(APP_NAME)
+
+clean:
+	rm $(APP_NAME)
