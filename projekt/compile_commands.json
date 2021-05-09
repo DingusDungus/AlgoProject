@@ -1,0 +1,30 @@
+[
+    {
+        "arguments": [
+            "clang++",
+            "-c",
+            "-Wall",
+            "-Werror",
+            "-Iinclude",
+            "-o",
+            "algo.app",
+            "main.cpp"
+        ],
+        "directory": "/home/noah/kurser/algo-datastrukturer/AlgoProject/projekt",
+        "file": "main.cpp"
+    },
+    {
+        "arguments": [
+            "clang++",
+            "-c",
+            "-Wall",
+            "-Werror",
+            "-Iinclude",
+            "-o",
+            "algo.app",
+            "src/adjList.cpp"
+        ],
+        "directory": "/home/noah/kurser/algo-datastrukturer/AlgoProject/projekt",
+        "file": "src/adjList.cpp"
+    }
+]
