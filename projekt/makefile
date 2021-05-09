@@ -1,6 +1,6 @@
 INCLUDE_DIRS= include
 INC_PARAMS=$(foreach d, $(INCLUDE_DIRS), -I$d)
-APP_NAME=algoApp
+APP_NAME=algo.app
 FLAGS=-Wall -Werror -o $(APP_NAME) $(INC_PARAMS)
 MEM_FLAGS=-Wall -Werror -fsanitize=address -fno-omit-frame-pointer -o $(APP_NAME) $(INC_PARAMS)
 
