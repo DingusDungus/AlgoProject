@@ -1,6 +1,6 @@
 #include "adjList.hpp"
 
-struct adjList::edge
+struct edge
 {
     vertice *from;
     vertice * to;
@@ -13,14 +13,14 @@ struct adjList::edge
     }
 };
 
-struct adjList::vertice
+struct vertice
 {
     char key;
     edge *edgeStart;
     vertice() { edgeStart = nullptr; }
 };
 
-adjList::vertice *adjList::find(char value)
+vertice *adjList::find(char value)
 {
     for (int i = 0; i < AdjList.size(); i++)
     {
@@ -116,4 +116,13 @@ void adjList::printList()
         }
         std::cout << "\n";
     }
+}
+
+vertice *adjList::operator[](const int& index)
+{
+    if (index >= AdjList.size() || index < 0)
+    {
+        throw std::invalid_argument("Index out of range! operator[]");
+    }
+    return AdjList[index];
 }

@@ -5,11 +5,12 @@
 #include <vector>
 #include <fstream>
 
+struct edge;
+struct vertice;
+
 class adjList
 {
 private:
-    struct edge;
-    struct vertice;
     vertice *find(char value);
     int getWeight(std::string line);
 
@@ -18,6 +19,8 @@ private:
 public:
     void createAdjList(std::string Filename);
     void printList();
+
+    vertice *operator[](const int& index);
 };
 
 #endif
