@@ -1,5 +1,25 @@
 #include "adjList.hpp"
 
+struct adjList::edge
+{
+    vertice *from;
+    vertice * to;
+    edge *next;
+    int weight;
+    edge()
+    {
+        weight = -1;
+        next = nullptr;
+    }
+};
+
+struct adjList::vertice
+{
+    char key;
+    edge *edgeStart;
+    vertice() { edgeStart = nullptr; }
+};
+
 adjList::vertice *adjList::find(char value)
 {
     for (int i = 0; i < AdjList.size(); i++)
@@ -45,15 +65,15 @@ void adjList::createAdjList(std::string Filename)
                 }
 
                 edge *ver1Edge = new edge;
-                ver1Edge->to = line[2];
-                ver1Edge->from = line[0];
+                ver1Edge->to = vertice2;
+                ver1Edge->from = vertice1;
                 ver1Edge->next = vertice1->edgeStart;
                 vertice1->edgeStart = ver1Edge;
                 ver1Edge->weight = getWeight(line);
 
                 edge *ver2Edge = new edge;
-                ver2Edge->from = line[2];
-                ver2Edge->to = line[0];
+                ver2Edge->from = vertice2;
+                ver2Edge->to = vertice1;
                 ver2Edge->next = vertice2->edgeStart;
                 vertice2->edgeStart = ver1Edge;
                 ver2Edge->weight = ver1Edge->weight;
@@ -81,18 +101,18 @@ int adjList::getWeight(std::string line)
 
 void adjList::printList()
 {
-    for (int i = 0;i < AdjList.size();i++)
+    for (int i = 0; i < AdjList.size(); i++)
     {
         std::cout << "Vertice: " << AdjList[i]->key << " ";
-        edge* walker = AdjList[i]->edgeStart;
-        while(walker->next != nullptr)
+        edge *walker = AdjList[i]->edgeStart;
+        while (walker->next != nullptr)
         {
-            std::cout << "(" << walker->from << ", " << walker->to << ", " << walker->weight << "), ";
+            std::cout << "(" << walker->from->key << ", " << walker->to->key << ", " << walker->weight << "), ";
             walker = walker->next;
         }
         if (walker->next == nullptr)
         {
-            std::cout << "(" << walker->from << ", " << walker->to << ", " << walker->weight << ")";
+            std::cout << "(" << walker->from->key << ", " << walker->to->key << ", " << walker->weight << ")";
         }
         std::cout << "\n";
     }

@@ -8,24 +8,8 @@
 class adjList
 {
 private:
-    struct edge
-    {
-        char from;
-        char to;
-        edge *next;
-        int weight;
-        edge()
-        {
-            weight = -1;
-            next = nullptr;
-        }
-    };
-    struct vertice
-    {
-        char key;
-        edge *edgeStart;
-        vertice() { edgeStart = nullptr; }
-    };
+    struct edge;
+    struct vertice;
     vertice *find(char value);
     int getWeight(std::string line);
 
