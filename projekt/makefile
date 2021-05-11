@@ -9,6 +9,9 @@ SRC:=$(shell find src -name '*.cpp')
 
 all: main
 
+app:
+	clang++ $(APP_SRC) $(SRC) $(FLAGS)
+
 main:
 	clang++ $(APP_SRC) $(SRC) $(FLAGS) && ./$(APP_NAME)
 
