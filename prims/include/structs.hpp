@@ -19,7 +19,8 @@ struct vertice
 {
     char key;
     verticeEdge *edgeStart;
-    vertice() { edgeStart = nullptr; }
+    bool used;
+    vertice() { edgeStart = nullptr; used = false; }
 };
 struct edge
 {

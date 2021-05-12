@@ -1,7 +1,12 @@
 a
 b
 c
+d
+e
 
-a b 20
-c b 7
-a c 30
+a c 20
+c e 10
+e d 5
+d b 3
+a b 7
+a d 2
