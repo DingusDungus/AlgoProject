@@ -16,6 +16,8 @@ private:
     std::vector<vertice*> AdjList;
 
 public:
+    ~adjList();
+
     void createAdjList(std::string Filename);
     void printList();
     void push(vertice* newVertice);

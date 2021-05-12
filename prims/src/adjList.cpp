@@ -117,3 +117,47 @@ void adjList::push(vertice *newVertice)
 {
     AdjList.push_back(newVertice);
 }
+
+adjList::~adjList()
+{
+    verticeEdge *walker1;
+    verticeEdge *walker2;
+    edge *currentEdge;
+    verticeEdge *oldEdgeHolder;
+    for (int i = 0; i < AdjList.size(); i++)
+    {
+        walker1 = AdjList[i]->edgeStart;
+        AdjList[i]->edgeStart = nullptr;
+        while (walker1 != nullptr)
+        {
+            if (walker1->vertice_edge != nullptr)
+            {
+                currentEdge = walker1->vertice_edge;
+                if (AdjList[i] == currentEdge->node1)
+                {
+                    walker2 = currentEdge->node2->edgeStart;
+                }
+                else
+                {
+                    walker2 = currentEdge->node1->edgeStart;
+                }
+
+                while (walker2->vertice_edge != currentEdge)
+                {
+                    walker2 = walker2->next;
+                }
+                walker2->vertice_edge = nullptr;
+
+                if (currentEdge != nullptr)
+                {
+                    delete currentEdge;
+                }
+            }
+
+            oldEdgeHolder = walker1;
+            walker1 = walker1->next;
+            delete oldEdgeHolder;
+        }
+        delete AdjList[i];
+    }
+}

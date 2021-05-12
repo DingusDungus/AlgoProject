@@ -12,11 +12,16 @@ bool Comparator::operator()(edge *edge1, edge *edge2)
 Prim::Prim(std::string Filename)
 {
     AdjList.createAdjList(Filename);
+    for (int i = 0;i < AdjList.size();i++)
+    {
+        MST.push_back(AdjList[i]->key);
+        MST.push_back('\n');
+    }
+    MST.push_back('\n');
 }
 
 std::string Prim::primMST()
 {
-    std::string MST;
     vertice *current = AdjList[0];
     vertice *ancestor = nullptr;
     int verticesAdded = 0;

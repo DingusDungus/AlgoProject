@@ -15,6 +15,8 @@ class Prim
 private:
     adjList AdjList;
     std::priority_queue<edge*, std::vector<edge*>, Comparator> priorityQueue;
+    std::string MST;
+
 public:
     Prim(std::string Filename);
     void print() {AdjList.printList(); }
