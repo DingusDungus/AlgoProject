@@ -8,10 +8,24 @@
             "-Iinclude",
             "-o",
             "algo.app",
-            "main.cpp"
+            "Main.cpp"
         ],
-        "directory": "/home/noah/kurser/algo-datastrukturer/AlgoProject/projekt",
-        "file": "main.cpp"
+        "directory": "/home/noah/kurser/algo-datastrukturer/AlgoProject/kruskals",
+        "file": "Main.cpp"
+    },
+    {
+        "arguments": [
+            "clang++",
+            "-c",
+            "-Wall",
+            "-Werror",
+            "-Iinclude",
+            "-o",
+            "algo.app",
+            "src/Graph.cpp"
+        ],
+        "directory": "/home/noah/kurser/algo-datastrukturer/AlgoProject/kruskals",
+        "file": "src/Graph.cpp"
     },
     {
         "arguments": [
@@ -24,7 +38,7 @@
             "algo.app",
             "src/adjList.cpp"
         ],
-        "directory": "/home/noah/kurser/algo-datastrukturer/AlgoProject/projekt",
+        "directory": "/home/noah/kurser/algo-datastrukturer/AlgoProject/kruskals",
         "file": "src/adjList.cpp"
     }
 ]
