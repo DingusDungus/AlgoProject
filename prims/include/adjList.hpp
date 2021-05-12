@@ -5,8 +5,7 @@
 #include <iostream>
 #include <vector>
 
-struct edge;
-struct vertice;
+#include "structs.hpp"
 
 class adjList
 {
@@ -19,6 +18,8 @@ private:
 public:
     void createAdjList(std::string Filename);
     void printList();
+    void push(vertice* newVertice);
+    int size();
 
     vertice* operator[](const int& index);
 };

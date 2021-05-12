@@ -1,26 +1,7 @@
 #include "adjList.hpp"
+#include "structs.hpp"
 
-struct edge
-{
-    vertice* from;
-    vertice* to;
-    edge* next;
-    int weight;
-    edge()
-    {
-        weight = -1;
-        next = nullptr;
-    }
-};
-
-struct vertice
-{
-    char key;
-    edge* edgeStart;
-    vertice() { edgeStart = nullptr; }
-};
-
-vertice* adjList::find(char value)
+vertice *adjList::find(char value)
 {
     for (int i = 0; i < AdjList.size(); i++)
     {
@@ -44,7 +25,7 @@ void adjList::createAdjList(std::string Filename)
         {
             if (line != "" && allNodesAdded == false)
             {
-                vertice* newNode = new vertice;
+                vertice *newNode = new vertice;
                 newNode->key = line[0];
                 AdjList.push_back(newNode);
             }
@@ -55,28 +36,29 @@ void adjList::createAdjList(std::string Filename)
 
             if (allNodesAdded && line != "")
             {
-                vertice* vertice1 = find(line[0]);
-                vertice* vertice2 = find(line[2]);
+                vertice *vertice1 = find(line[0]);
+                vertice *vertice2 = find(line[2]);
 
                 if (vertice1 == nullptr || vertice2 == nullptr)
                 {
                     throw std::invalid_argument(
                         "Invalid structure in textfile");
                 }
+                verticeEdge *verNode1 = new verticeEdge;
+                verticeEdge *verNode2 = new verticeEdge;
+                edge *Edge = new edge;
+                verNode1->vertice_edge = Edge;
+                verNode2->vertice_edge = Edge;
 
-                edge* ver1Edge = new edge;
-                ver1Edge->to = vertice2;
-                ver1Edge->from = vertice1;
-                ver1Edge->next = vertice1->edgeStart;
-                vertice1->edgeStart = ver1Edge;
-                ver1Edge->weight = getWeight(line);
+                Edge->node1 = vertice2;
+                Edge->node2 = vertice1;
 
-                edge* ver2Edge = new edge;
-                ver2Edge->from = vertice2;
-                ver2Edge->to = vertice1;
-                ver2Edge->next = vertice2->edgeStart;
-                vertice2->edgeStart = ver1Edge;
-                ver2Edge->weight = ver1Edge->weight;
+                verNode1->next = vertice1->edgeStart;
+                vertice1->edgeStart = verNode1;
+                verNode2->next = vertice2->edgeStart;
+                vertice2->edgeStart = verNode2;
+
+                Edge->weight = getWeight(line);
             }
         }
     }
@@ -104,27 +86,34 @@ void adjList::printList()
     for (int i = 0; i < AdjList.size(); i++)
     {
         std::cout << "Vertice: " << AdjList[i]->key << " ";
-        edge* walker = AdjList[i]->edgeStart;
+        verticeEdge *walker = AdjList[i]->edgeStart;
         while (walker->next != nullptr)
         {
-            std::cout << "(" << walker->from->key << ", " << walker->to->key
-                      << ", " << walker->weight << "), ";
+            std::cout << "(" << walker->vertice_edge->node1->key << ", " << walker->vertice_edge->node2->key
+                      << ", " << walker->vertice_edge->weight << "), ";
             walker = walker->next;
         }
         if (walker->next == nullptr)
         {
-            std::cout << "(" << walker->from->key << ", " << walker->to->key
-                      << ", " << walker->weight << ")";
+            std::cout << "(" << walker->vertice_edge->node1->key << ", " << walker->vertice_edge->node2->key
+                      << ", " << walker->vertice_edge->weight << ")";
         }
         std::cout << "\n";
     }
 }
 
-vertice* adjList::operator[](const int& index)
+vertice *adjList::operator[](const int &index)
 {
     if (index >= AdjList.size() || index < 0)
     {
         throw std::invalid_argument("Index out of range! operator[]");
     }
     return AdjList[index];
+}
+
+int adjList::size() { return AdjList.size(); }
+
+void adjList::push(vertice *newVertice)
+{
+    AdjList.push_back(newVertice);
 }

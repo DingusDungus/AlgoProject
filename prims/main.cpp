@@ -1,4 +1,5 @@
 #include "adjList.hpp"
+#include "prim.hpp"
 
 int main(int argc, char* argv[])
 {
@@ -10,12 +11,9 @@ int main(int argc, char* argv[])
         return 0;
     }
     adjList adjList;
-    adjList.createAdjList("graph.txt");
-    adjList.printList();
-    std::cout << argc << std::endl;
-    for (int i = 0; i < argc; i++)
-    {
-        std::cout << argv[i] << std::endl;
-    }
+    
+    Prim prim(argv[1]);
+    prim.primMST();
+
     return 0;
 }
