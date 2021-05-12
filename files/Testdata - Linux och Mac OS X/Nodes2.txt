@@ -1,0 +1,37 @@
+A
+B
+C
+D
+E
+F
+G
+H
+I
+J
+K
+L
+M
+N
+O
+
+A	J	3
+A	D	2
+A	C	3
+A	H	5
+A	G	3
+B	F	6
+B	E	4
+B	M	1
+B	J	3
+B	L	2
+B	K	4
+C	H	2
+C	O	4
+C	I	2
+D	I	4
+D	E	4
+E	K	3
+G	H	2
+G	N	4
+J	M	1
+J	L	1
