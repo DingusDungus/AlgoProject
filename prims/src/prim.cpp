@@ -20,13 +20,16 @@ std::string Prim::primMST()
     vertice *current = AdjList[0];
     vertice *ancestor = nullptr;
     int verticesAdded = 0;
+    edge *chosenEdge;
+    verticeEdge *walker;
+
     while (verticesAdded <= AdjList.size())
     {
         if (current != ancestor)
         {
             current->used = true;
             verticesAdded++;
-            verticeEdge *walker = current->edgeStart;
+            walker = current->edgeStart;
             while (walker != nullptr)
             {
                 if (!walker->vertice_edge->used)
@@ -37,7 +40,7 @@ std::string Prim::primMST()
             }
         }
         
-        edge *chosenEdge = priorityQueue.top();
+        chosenEdge = priorityQueue.top();
         priorityQueue.pop();
         chosenEdge->used = true;
         if (!chosenEdge->node1->used || !chosenEdge->node2->used)
