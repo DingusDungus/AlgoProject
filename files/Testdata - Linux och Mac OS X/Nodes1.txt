@@ -1,0 +1,12 @@
+Vacation Village
+Terrific Town
+Carnival City
+Marvelous Magnificent Metropolis
+Rainy Resort
+
+Terrific Town	Carnival City	10
+Marvelous Magnificent Metropolis	Terrific Town	8
+Vacation Village	Rainy Resort	1
+Vacation Village	Carnival City	20
+Rainy Resort	Carnival City	4
+Marvelous Magnificent Metropolis	Rainy Resort	12
