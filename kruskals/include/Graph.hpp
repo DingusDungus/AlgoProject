@@ -1,18 +1,25 @@
 #ifndef GRAPH_HPP
 #define GRAPH_HPP
 
-struct ed
+struct Edge
 {
-    // Code
+    char vert1;
+    char vert2;
+    int weight;
+    Edge(char vert1, char vert2, int weight)
+    {
+        this->vert1 = vert1;
+        this->vert2 = vert2;
+        this->weight = weight;
+    }
 };
 
-class Kruskal
+class MST
 {
-public:
-    Kruskal();
-    virtual ~Kruskal();
-
 private:
+public:
+    MST();
+    virtual ~MST();
 };
 
 #endif /* GRAPH_HPP */
