@@ -10,7 +10,6 @@ int main(int argc, char* argv[])
                   << std::endl;
         return 0;
     }
-    adjList adjList;
 
     Prim prim(argv[1]);
     std::string MST = prim.primMST();
