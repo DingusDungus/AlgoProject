@@ -13,7 +13,7 @@ int main(int argc, char* argv[])
     adjList adjList;
     
     Prim prim(argv[1]);
-    prim.primMST();
-
+    std::string MST = prim.primMST();
+    std::cout << MST;
     return 0;
 }

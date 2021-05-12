@@ -16,7 +16,7 @@ Prim::Prim(std::string Filename)
 
 std::string Prim::primMST()
 {
-    adjList MST;
+    std::string MST;
     vertice *current = AdjList[0];
     vertice *ancestor = nullptr;
     int verticesAdded = 0;
@@ -36,33 +36,30 @@ std::string Prim::primMST()
                 walker = walker->next;
             }
         }
+        
         edge *chosenEdge = priorityQueue.top();
-        chosenEdge->used = true;
         priorityQueue.pop();
+        chosenEdge->used = true;
         if (!chosenEdge->node1->used || !chosenEdge->node2->used)
         {
-            vertice *newVertice = new vertice;
-            verticeEdge *newVerticeEdge = new verticeEdge;
-            newVerticeEdge->next = newVertice->edgeStart;
-            newVertice->edgeStart = newVerticeEdge;
-            newVerticeEdge->vertice_edge = chosenEdge;
 
             ancestor = current;
             if (!chosenEdge->node1->used)
             {
                 current = chosenEdge->node1;
-                newVertice->key = current->key;
             }
             else
             {
                 current = chosenEdge->node2;
-                newVertice->key = current->key;
             }
-            MST.push(newVertice);
+            MST.push_back(chosenEdge->node1->key);
+            MST.push_back(' ');
+            MST.push_back(chosenEdge->node2->key);
+            MST.push_back(' ');
+            MST += std::to_string(chosenEdge->weight);
+            MST.push_back('\n');
         }
     }
 
-    MST.printList();
-
-    return "";
+    return MST;
 }
