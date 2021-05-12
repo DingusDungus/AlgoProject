@@ -11,7 +11,7 @@ int main(int argc, char* argv[])
         return 0;
     }
     adjList adjList;
-    
+
     Prim prim(argv[1]);
     prim.primMST();
 
