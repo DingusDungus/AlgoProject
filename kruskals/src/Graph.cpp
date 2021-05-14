@@ -13,6 +13,7 @@ bool Comparator::operator()(const Edge& edge1, const Edge& edge2)
 
 void MST::debugPrint()
 {
+    std::cout << "Total number of vertices: " << nrOfVerts << std::endl;
     while (!pQueue.empty())
     {
         std::cout << pQueue.top().from->key << " ";
@@ -22,11 +23,57 @@ void MST::debugPrint()
     }
 }
 
-MST::MST(std::string fileName) { fromFile(fileName); }
+Vert* MST::findAbsoluteParent(Vert* vert)
+{
+    Vert* walker = vert;
+    while (walker->parent != nullptr)
+    {
+        walker = walker->parent;
+    }
+    vert->parent = walker;  // path compression
+    return walker;
+}
+
+void MST::setUnion(Vert* fromParent, Vert* toParent)
+{
+    if (fromParent->rank > toParent->rank)
+    {
+        toParent->parent = fromParent;
+    }
+    else if (fromParent->rank < toParent->rank)
+    {
+        fromParent->parent = toParent;
+    }
+    else  // they have the same rank
+    {
+        fromParent->parent = toParent;
+        toParent->rank += 1;
+    }
+}
+
+void MST::kruskals()
+{
+    int i = 0;
+    while (i < nrOfVerts - 1 && !pQueue.empty())
+    {
+        // todo
+    }
+}
+
+MST::MST(std::string fileName)
+{
+    // read vertices and edges from file
+    fromFile(fileName);
+    nrOfVerts = verts.size();
+}
 
 MST::~MST()
 {
-
+    // delete all vertice pointers
+    for (int i = 0; i < verts.size(); i++)
+    {
+        delete verts[i];
+    }
 }
 
 Vert* MST::findVert(char value)

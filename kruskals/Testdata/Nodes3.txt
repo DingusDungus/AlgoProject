@@ -1,0 +1,11 @@
+Alpha
+Beta
+Gamma
+Delta
+Epsilon
+
+Alpha	Epsilon	3
+Alpha	Beta	2
+Beta	Gamma	3
+Gamma	Delta	5
+Delta	Epsilon	3

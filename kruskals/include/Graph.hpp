@@ -12,7 +12,7 @@ struct Vert
 {
     char key;
     Vert* parent = nullptr;
-    int prio = 0;
+    int rank = 0;
     Vert(char key) { this->key = key; }
 };
 
@@ -44,11 +44,15 @@ struct Comparator
 class MST
 {
 private:
+    // Kruskals
     int nrOfVerts = 0;
     std::vector<Vert*> verts;
     std::priority_queue<Edge, std::vector<Edge>, Comparator> pQueue;
+    Vert* findAbsoluteParent(Vert* vert);
+    void setUnion(Vert* fromParent, Vert* toParent);
+    void kruskals();
+    // file reading
     void fromFile(std::string filename);
-    Vert* absoluteParent(Vert* vert);
     Vert* findVert(char value);
     int getWeight(std::string line);
 
