@@ -9,7 +9,6 @@ int main(int argc, char* argv[])
         return -1;
     }
 
-
     MST mst(argv[1]);
     mst.debugPrint();
 
