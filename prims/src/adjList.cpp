@@ -1,7 +1,7 @@
 #include "adjList.hpp"
 #include "structs.hpp"
 
-vertice *adjList::find(char value)
+vertice *adjList::find(std::string value)
 {
     for (int i = 0; i < AdjList.size(); i++)
     {
@@ -26,7 +26,7 @@ void adjList::createAdjList(std::string Filename)
             if (line != "" && allNodesAdded == false)
             {
                 vertice *newNode = new vertice;
-                newNode->key = line[0];
+                newNode->key = line;
                 AdjList.push_back(newNode);
             }
             else
@@ -36,8 +36,10 @@ void adjList::createAdjList(std::string Filename)
 
             if (allNodesAdded && line != "")
             {
-                vertice *vertice1 = find(line[0]);
-                vertice *vertice2 = find(line[2]);
+                std::string vertice1Name = getName(0, line);
+                std::string vertice2Name = getName(vertice1Name.length() + 1, line);
+                vertice *vertice1 = find(vertice1Name);
+                vertice *vertice2 = find(vertice2Name);
 
                 if (vertice1 == nullptr || vertice2 == nullptr)
                 {
@@ -58,7 +60,7 @@ void adjList::createAdjList(std::string Filename)
                 verNode2->next = vertice2->edgeStart;
                 vertice2->edgeStart = verNode2;
 
-                Edge->weight = getWeight(line);
+                Edge->weight = getWeight(line, (vertice1Name.length() + 1 + vertice2Name.length() + 1));
             }
         }
     }
@@ -68,16 +70,29 @@ void adjList::createAdjList(std::string Filename)
     }
 }
 
-int adjList::getWeight(std::string line)
+std::string adjList::getName(const int& startIndex, const std::string &line)
 {
-    std::string numberString;
-    int iterator = 4;
-    while (line[iterator] != ' ')
+    std::string name;
+    int iterator = startIndex;
+    while(line[iterator] != '\t')
+    {
+        name += line[iterator];
+        iterator++;
+    }
+    return name;
+}
+
+int adjList::getWeight(std::string line, const int& startIndex)
+{
+    std::string numberString = "";
+    int iterator = startIndex;
+    int number = 0;
+    while (iterator < line.length())
     {
         numberString += line[iterator];
         iterator++;
     }
-    int number = std::stoi(numberString);
+    number = std::stoi(numberString);
     return number;
 }
 
@@ -148,10 +163,7 @@ adjList::~adjList()
                 }
                 walker2->vertice_edge = nullptr;
 
-                if (currentEdge != nullptr)
-                {
-                    delete currentEdge;
-                }
+                delete currentEdge;
             }
 
             oldEdgeHolder = walker1;

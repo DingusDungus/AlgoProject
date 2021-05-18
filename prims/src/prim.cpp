@@ -2,7 +2,7 @@
 
 bool Comparator::operator()(edge *edge1, edge *edge2)
 {
-    if (!edge1->used && edge1->weight > edge2->weight)
+    if ((!edge1->used && edge2->used) || (edge1->weight > edge2->weight))
     {
         return true;
     }
@@ -12,12 +12,13 @@ bool Comparator::operator()(edge *edge1, edge *edge2)
 Prim::Prim(std::string Filename)
 {
     AdjList.createAdjList(Filename);
-    for (int i = 0;i < AdjList.size();i++)
+    for (int i = 0; i < AdjList.size(); i++)
     {
-        MST.push_back(AdjList[i]->key);
+        MST += AdjList[i]->key;
         MST.push_back('\n');
     }
     MST.push_back('\n');
+    std::cout << "Size: " << AdjList.size() << "\n";
 }
 
 std::string Prim::primMST()
@@ -28,12 +29,11 @@ std::string Prim::primMST()
     edge *chosenEdge;
     verticeEdge *walker;
 
-    while (verticesAdded <= AdjList.size())
+    while (verticesAdded < AdjList.size() - 1)
     {
         if (current != ancestor)
         {
             current->used = true;
-            verticesAdded++;
             walker = current->edgeStart;
             while (walker != nullptr)
             {
@@ -44,7 +44,7 @@ std::string Prim::primMST()
                 walker = walker->next;
             }
         }
-        
+
         chosenEdge = priorityQueue.top();
         priorityQueue.pop();
         chosenEdge->used = true;
@@ -60,14 +60,29 @@ std::string Prim::primMST()
             {
                 current = chosenEdge->node2;
             }
-            MST.push_back(chosenEdge->node1->key);
-            MST.push_back(' ');
-            MST.push_back(chosenEdge->node2->key);
-            MST.push_back(' ');
+            MST += chosenEdge->node1->key;
+            MST.push_back('\t');
+            MST += chosenEdge->node2->key;
+            MST.push_back('\t');
             MST += std::to_string(chosenEdge->weight);
-            MST.push_back('\n');
+            if (verticesAdded < AdjList.size() - 1)
+            {
+                MST.push_back('\n');
+            }
+            verticesAdded++;
         }
     }
 
     return MST;
+}
+
+void Prim::createMSTfile() const
+{
+    std::ofstream mstFile;
+    mstFile.open("mstFile.txt");
+    mstFile.clear();
+
+    mstFile << MST;
+
+    mstFile.close();
 }

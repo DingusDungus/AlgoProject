@@ -10,8 +10,9 @@
 class adjList
 {
 private:
-    vertice* find(char value);
-    int getWeight(std::string line);
+    vertice* find(std::string value);
+    int getWeight(std::string line, const int& startIndex);
+    std::string getName(const int& startIndex, const std::string &line);
 
     std::vector<vertice*> AdjList;
 

@@ -3,6 +3,7 @@
 
 int main(int argc, char* argv[])
 {
+    /*
     if (argc != 3)
     {
         std::cout << "Wrong number of Command line arguments, expected 2 "
@@ -10,9 +11,11 @@ int main(int argc, char* argv[])
                   << std::endl;
         return 0;
     }
+    */
 
-    Prim prim(argv[1]);
+    Prim prim("Nodes1.txt");
     std::string MST = prim.primMST();
     std::cout << MST;
+    prim.createMSTfile();
     return 0;
 }

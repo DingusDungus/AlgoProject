@@ -1,6 +1,8 @@
 #ifndef STRUCTS
 #define STRUCTS
 
+#include <string>
+
 struct verticeEdge;
 struct vertice;
 struct edge;
@@ -17,10 +19,10 @@ struct verticeEdge
 };
 struct vertice
 {
-    char key;
+    std::string key;
     verticeEdge *edgeStart;
     bool used;
-    vertice() { edgeStart = nullptr; used = false; }
+    vertice() { edgeStart = nullptr; used = false; key = ' '; }
 };
 struct edge
 {
@@ -32,6 +34,8 @@ struct edge
     {
         weight = -1;
         used = false;
+        node1 = nullptr;
+        node2 = nullptr;
     }
 };
 
