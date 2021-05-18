@@ -10,8 +10,22 @@
             "algo.app",
             "main.cpp"
         ],
-        "directory": "/home/noah/kurser/algo-datastrukturer/AlgoProject/projekt",
+        "directory": "/home/noah/kurser/algo-datastrukturer/AlgoProject/prims",
         "file": "main.cpp"
+    },
+    {
+        "arguments": [
+            "clang++",
+            "-c",
+            "-Wall",
+            "-Werror",
+            "-Iinclude",
+            "-o",
+            "algo.app",
+            "src/prim.cpp"
+        ],
+        "directory": "/home/noah/kurser/algo-datastrukturer/AlgoProject/prims",
+        "file": "src/prim.cpp"
     },
     {
         "arguments": [
@@ -24,7 +38,7 @@
             "algo.app",
             "src/adjList.cpp"
         ],
-        "directory": "/home/noah/kurser/algo-datastrukturer/AlgoProject/projekt",
+        "directory": "/home/noah/kurser/algo-datastrukturer/AlgoProject/prims",
         "file": "src/adjList.cpp"
     }
 ]

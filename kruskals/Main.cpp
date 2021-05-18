@@ -1,5 +1,6 @@
-#include "Graph.hpp"
 #include <iostream>
+
+#include "Graph.hpp"
 
 int main(int argc, char* argv[])
 {
@@ -8,10 +9,8 @@ int main(int argc, char* argv[])
         return -1;
     }
 
-    Edge edge('A', 'B', 2);
-    Edge edge2('C', 'D', 4);
-    std::cout << (edge < edge2) << std::endl;
-    std::cout << (edge2 < edge) << std::endl;
+    MST mst(argv[1]);
+    mst.debugPrint();
 
     return 0;
 }
