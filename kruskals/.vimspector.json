@@ -4,8 +4,8 @@
       "adapter": "vscode-cpptools",
       "configuration": {
         "request": "launch",
-        "program": "algo.app",
-        "cwd": "/home/noah/kurser/algo-datastrukturer/AlgoProject/kruskals",
+        "program": "algoapp",
+        "cwd": "/home/noah/kurser/algo-datastrukturer/AlgoProject",
         "externalConsole": true,
         "MIMode": "gdb"
       }

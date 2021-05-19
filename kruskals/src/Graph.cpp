@@ -23,33 +23,39 @@ MST::MST(std::string fileName)
 
 void MST::debugPrint()
 {
-    std::cout << "Total number of vertices: " << nrOfVerts << std::endl;
-    while (!pQueue.empty())
-    {
-        std::cout << pQueue.top().from->key << " ";
-        std::cout << pQueue.top().to->key << " ";
-        std::cout << pQueue.top().weight << std::endl;
-        pQueue.pop();
-    }
+    // std::cout << "Total number of vertices: " << nrOfVerts << std::endl;
+    // while (!pQueue.empty())
+    //{
+    // std::cout << pQueue.top().from->key << " ";
+    // std::cout << pQueue.top().to->key << " ";
+    // std::cout << pQueue.top().weight << std::endl;
+    // pQueue.pop();
+    //}
 }
 
 std::string MST::toString()
 {
     std::string toReturn = "";
-    for (int i = 0; i < doneMST.size(); i++) {
-        toReturn += doneMST[i].toString();
+    for (int i = 0; i < doneMST.size(); i++)
+    {
+        toReturn += doneMST[i].toString() + "\n";
     }
     return toReturn;
 }
 
 Vert* MST::findAbsoluteParent(Vert* vert)
 {
+    std::cout << vert->key << std::endl;
     Vert* walker = vert;
     while (walker->parent != nullptr)
     {
         walker = walker->parent;
     }
-    vert->parent = walker;  // path compression
+    // path compression
+    if (vert != walker)
+    {
+        vert->parent = walker;
+    }
     return walker;
 }
 
@@ -76,6 +82,7 @@ void MST::kruskals()
     while (addedEdges < nrOfVerts - 1 && !pQueue.empty())
     {
         Edge currentEdge = pQueue.top();
+        std::cout << "Current edge: " << currentEdge.toString() << std::endl;
         Vert* fromParent = findAbsoluteParent(currentEdge.from);
         Vert* toParent = findAbsoluteParent(currentEdge.to);
 
@@ -85,6 +92,7 @@ void MST::kruskals()
             doneMST.push_back(currentEdge);
             addedEdges++;
         }
+        pQueue.pop();
     }
 }
 
@@ -154,6 +162,7 @@ void MST::fromFile(std::string filename)
                 }
                 int weight = getWeight(line);
                 Edge edge = Edge(from, to, weight);
+                std::cout << "Adding edge: " << edge.toString() << std::endl;
                 pQueue.push(edge);
             }
         }

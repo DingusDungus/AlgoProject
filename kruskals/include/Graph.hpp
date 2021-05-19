@@ -37,8 +37,10 @@ struct Edge
     std::string toString()
     {
         std::string toReturn = "";
-        toReturn += std::to_string(from->key);
-        toReturn += std::to_string(to->key);
+        toReturn += from->key;
+        toReturn += " ";
+        toReturn += to->key;
+        toReturn += " ";
         toReturn += std::to_string(weight);
         return toReturn;
     }
