@@ -1,0 +1,14 @@
+{
+  "configurations": {
+    "Launch": {
+      "adapter": "vscode-cpptools",
+      "configuration": {
+        "request": "launch",
+        "program": "algo.app",
+        "cwd": "/home/noah/kurser/algo-datastrukturer/AlgoProject/kruskals",
+        "externalConsole": true,
+        "MIMode": "gdb"
+      }
+    }
+  }
+}

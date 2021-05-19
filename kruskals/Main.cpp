@@ -11,6 +11,7 @@ int main(int argc, char* argv[])
 
     MST mst(argv[1]);
     mst.debugPrint();
+    std::cout << mst.toString() << std::endl;
 
     return 0;
 }

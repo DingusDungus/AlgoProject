@@ -34,6 +34,14 @@ struct Edge
     {
         return l.weight < r.weight;
     }
+    std::string toString()
+    {
+        std::string toReturn = "";
+        toReturn += std::to_string(from->key);
+        toReturn += std::to_string(to->key);
+        toReturn += std::to_string(weight);
+        return toReturn;
+    }
 };
 
 struct Comparator
@@ -48,6 +56,7 @@ private:
     int nrOfVerts = 0;
     std::vector<Vert*> verts;
     std::priority_queue<Edge, std::vector<Edge>, Comparator> pQueue;
+    std::vector<Edge> doneMST;
     Vert* findAbsoluteParent(Vert* vert);
     void setUnion(Vert* fromParent, Vert* toParent);
     void kruskals();

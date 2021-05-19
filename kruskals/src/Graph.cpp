@@ -1,6 +1,7 @@
 #include "Graph.hpp"
 
 #include <iostream>
+#include <string>
 
 bool Comparator::operator()(const Edge& edge1, const Edge& edge2)
 {
@@ -9,6 +10,15 @@ bool Comparator::operator()(const Edge& edge1, const Edge& edge2)
         return true;
     }
     return false;
+}
+
+MST::MST(std::string fileName)
+{
+    // read vertices and edges from file
+    fromFile(fileName);
+    nrOfVerts = verts.size();
+    // run kruskals
+    kruskals();
 }
 
 void MST::debugPrint()
@@ -21,6 +31,15 @@ void MST::debugPrint()
         std::cout << pQueue.top().weight << std::endl;
         pQueue.pop();
     }
+}
+
+std::string MST::toString()
+{
+    std::string toReturn = "";
+    for (int i = 0; i < doneMST.size(); i++) {
+        toReturn += doneMST[i].toString();
+    }
+    return toReturn;
 }
 
 Vert* MST::findAbsoluteParent(Vert* vert)
@@ -53,18 +72,20 @@ void MST::setUnion(Vert* fromParent, Vert* toParent)
 
 void MST::kruskals()
 {
-    int i = 0;
-    while (i < nrOfVerts - 1 && !pQueue.empty())
+    int addedEdges = 0;
+    while (addedEdges < nrOfVerts - 1 && !pQueue.empty())
     {
-        // todo
-    }
-}
+        Edge currentEdge = pQueue.top();
+        Vert* fromParent = findAbsoluteParent(currentEdge.from);
+        Vert* toParent = findAbsoluteParent(currentEdge.to);
 
-MST::MST(std::string fileName)
-{
-    // read vertices and edges from file
-    fromFile(fileName);
-    nrOfVerts = verts.size();
+        if (fromParent != toParent)
+        {
+            setUnion(fromParent, toParent);
+            doneMST.push_back(currentEdge);
+            addedEdges++;
+        }
+    }
 }
 
 MST::~MST()
