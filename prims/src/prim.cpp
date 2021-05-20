@@ -76,10 +76,10 @@ std::string Prim::primMST()
     return MST;
 }
 
-void Prim::createMSTfile() const
+void Prim::createMSTfile(std::string fileName) const
 {
     std::ofstream mstFile;
-    mstFile.open("mstFile.txt");
+    mstFile.open(fileName);
     mstFile.clear();
 
     mstFile << MST;

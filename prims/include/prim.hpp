@@ -20,7 +20,7 @@ private:
 public:
     Prim(std::string Filename);
     void print() {AdjList.printList(); }
-    void createMSTfile() const;
+    void createMSTfile(std::string fileName) const;
 
     std::string primMST();
 };
