@@ -10,10 +10,10 @@
 // For kruskals algorithm
 struct Vert
 {
-    char key;
+    std::string key;
     Vert* parent = nullptr;
     int rank = 0;
-    Vert(char key) { this->key = key; }
+    Vert(std::string key) { this->key = key; }
 };
 
 // Edge Struct
@@ -38,9 +38,9 @@ struct Edge
     {
         std::string toReturn = "";
         toReturn += from->key;
-        toReturn += " ";
+        toReturn += "\t";
         toReturn += to->key;
-        toReturn += " ";
+        toReturn += "\t";
         toReturn += std::to_string(weight);
         return toReturn;
     }
@@ -64,8 +64,11 @@ private:
     void kruskals();
     // file reading
     void fromFile(std::string filename);
-    Vert* findVert(char value);
+    Vert* findVert(std::string value);
     int getWeight(std::string line);
+    std::string getName(const int& startIndex, const std::string& line);
+    int getWeight(std::string line, const int& startIndex);
+    Vert* find(std::string value);
 
 public:
     MST() = delete;

@@ -33,9 +33,24 @@ void MST::debugPrint()
     //}
 }
 
+void MST::toFile(std::string filename)
+{
+    std::ofstream mstFile;
+    mstFile.open(filename);
+    mstFile.clear();
+
+    mstFile << toString();
+
+    mstFile.close();
+}
+
 std::string MST::toString()
 {
     std::string toReturn = "";
+    for (int i = 0; i < verts.size(); i++) {
+        toReturn += verts[i]->key + "\n";
+    }
+    toReturn += "\n";
     for (int i = 0; i < doneMST.size(); i++)
     {
         toReturn += doneMST[i].toString() + "\n";
@@ -45,7 +60,6 @@ std::string MST::toString()
 
 Vert* MST::findAbsoluteParent(Vert* vert)
 {
-    std::cout << vert->key << std::endl;
     Vert* walker = vert;
     while (walker->parent != nullptr)
     {
@@ -82,7 +96,6 @@ void MST::kruskals()
     while (addedEdges < nrOfVerts - 1 && !pQueue.empty())
     {
         Edge currentEdge = pQueue.top();
-        std::cout << "Current edge: " << currentEdge.toString() << std::endl;
         Vert* fromParent = findAbsoluteParent(currentEdge.from);
         Vert* toParent = findAbsoluteParent(currentEdge.to);
 
@@ -105,7 +118,7 @@ MST::~MST()
     }
 }
 
-Vert* MST::findVert(char value)
+Vert* MST::findVert(std::string value)
 {
     for (int i = 0; i < verts.size(); i++)
     {
@@ -117,16 +130,29 @@ Vert* MST::findVert(char value)
     return nullptr;
 }
 
-int MST::getWeight(std::string line)
+std::string MST::getName(const int& startIndex, const std::string& line)
 {
-    std::string numberString;
-    int iterator = 4;
-    while (line[iterator] != ' ')
+    std::string name;
+    int iterator = startIndex;
+    while (line[iterator] != '\t')
+    {
+        name += line[iterator];
+        iterator++;
+    }
+    return name;
+}
+
+int MST::getWeight(std::string line, const int& startIndex)
+{
+    std::string numberString = "";
+    int iterator = startIndex;
+    int number = 0;
+    while (iterator < line.length())
     {
         numberString += line[iterator];
         iterator++;
     }
-    int number = std::stoi(numberString);
+    number = std::stoi(numberString);
     return number;
 }
 
@@ -134,33 +160,38 @@ void MST::fromFile(std::string filename)
 {
     std::ifstream file;
     file.open(filename);
-    bool allVertsAdded = false;
+    bool allNodesAdded = false;
     if (file.is_open())
     {
         std::string line;
         while (std::getline(file, line))
         {
-            if (line != "" && allVertsAdded == false)
+            if (line != "" && allNodesAdded == false)
             {
-                Vert* newVert = new Vert(line[0]);
-                verts.push_back(newVert);
+                Vert* newNode = new Vert(line);
+                verts.push_back(newNode);
             }
             else
             {
-                allVertsAdded = true;
+                allNodesAdded = true;
             }
 
-            if (allVertsAdded && line != "")
+            if (allNodesAdded && line != "")
             {
-                Vert* from = findVert(line[0]);
-                Vert* to = findVert(line[2]);
+                std::string vertice1Name = getName(0, line);
+                std::string vertice2Name =
+                    getName(vertice1Name.length() + 1, line);
+                Vert* from = findVert(vertice1Name);
+                Vert* to = findVert(vertice2Name);
 
                 if (from == nullptr || to == nullptr)
                 {
                     throw std::invalid_argument(
                         "Invalid structure in textfile");
                 }
-                int weight = getWeight(line);
+
+                int weight = getWeight(line, (vertice1Name.length() + 1 +
+                                              vertice2Name.length() + 1));
                 Edge edge = Edge(from, to, weight);
                 std::cout << "Adding edge: " << edge.toString() << std::endl;
                 pQueue.push(edge);
