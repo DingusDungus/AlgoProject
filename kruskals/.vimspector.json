@@ -1,0 +1,14 @@
+{
+  "configurations": {
+    "Launch": {
+      "adapter": "vscode-cpptools",
+      "configuration": {
+        "request": "launch",
+        "program": "algoapp",
+        "cwd": "/home/noah/kurser/algo-datastrukturer/AlgoProject",
+        "externalConsole": true,
+        "MIMode": "gdb"
+      }
+    }
+  }
+}

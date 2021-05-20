@@ -4,13 +4,17 @@
 
 int main(int argc, char* argv[])
 {
-    if (argc < 3)
-    {
-        return -1;
-    }
+    /*
+     if (argc < 3)
+     {
+         return -1;
+     }
+     */
 
-    MST mst(argv[1]);
-    mst.debugPrint();
+    MST mst("graph.txt");
+    //mst.debugPrint();
+    std::cout << "\nKruskals MST:" << std::endl;
+    std::cout << mst.toString() << std::endl;
 
     return 0;
 }
